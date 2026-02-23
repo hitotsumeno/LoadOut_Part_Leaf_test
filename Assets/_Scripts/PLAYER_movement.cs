@@ -22,14 +22,11 @@ public class PLAYER_movement : MonoBehaviour
     [SerializeField] private float groundDeceleration = 20f;
     [SerializeField] private float horizontalMaxSpeed = 12.5f;
 
-    [Header("Move Var")]
-    [SerializeField] private bool isAlmostStoped;
-    [SerializeField] private float angularSpeed;
-
-    [Header("Torque - Rotation")]
-    [SerializeField] private float torqueForce;
+    [Header("Rotation")]
+    [SerializeField] private float rotationCoef;
 
     //Collision check var
+    [Header("Ground")]
     private RaycastHit2D _groundHit;
     [SerializeField] private bool _isGrounded;
     [SerializeField] private float groundDetectionRayLength;
@@ -54,7 +51,6 @@ public class PLAYER_movement : MonoBehaviour
         {
             Jump();
         }
-        RotateCircle();
     }
 
 
@@ -63,7 +59,7 @@ public class PLAYER_movement : MonoBehaviour
         CollisionChecks();
 
         Move(groundAcceleration, groundDeceleration, _movementDir);
-        //RotateCircle();
+        //RotateCircle(_moveVelocity.x);
     }
 
     private void Move(float acceleration, float deceleration, Vector2 moveInput)
@@ -75,16 +71,16 @@ public class PLAYER_movement : MonoBehaviour
 
             _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.deltaTime);
             _rb.velocity = new Vector2(_moveVelocity.x, _rb.velocity.y);
+            RotateCircle(_moveVelocity.x);
         }
 
         if (moveInput == Vector2.zero)
         {
             _moveVelocity = Vector2.Lerp(_moveVelocity,Vector2.zero, deceleration * Time.deltaTime);
             _rb.velocity = new Vector2(_moveVelocity.x, _rb.velocity.y);
+            RotateCircle(_moveVelocity.x);
         }
 
-        angularSpeed = Mathf.Abs(_rb.angularVelocity);
-        isAlmostStoped = angularSpeed < 5f;
     }
     private void Jump()
     {
@@ -94,14 +90,9 @@ public class PLAYER_movement : MonoBehaviour
         }
     }
 
-    private void RotateCircle()
+    private void RotateCircle(float cVelocity)
     {
-        _rb.AddTorque(_movementDir.x * torqueForce * Time.deltaTime);
-
-        if (isAlmostStoped)
-        {
-            transform.Rotate(0, 0, _movementDir.x * -0.1f);
-        }
+        _spriteGO.transform.Rotate(0, 0, cVelocity * rotationCoef);
     }
 
     #region Ground Check
