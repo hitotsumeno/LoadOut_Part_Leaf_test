@@ -17,7 +17,7 @@ public class PlayerJumpState : PlayerBaseState
     }
     public override void ExitState()
     {
-        Reader.MoveEvent -=HandleMove;
+        Reader.MoveEvent -= HandleMove;
         Reader.JumpEvent -= HandleJump;
     }
 
