@@ -853,7 +853,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -3.12, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1272,7 +1272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &721526259
 Transform:
   m_ObjectHideFlags: 0
@@ -1578,7 +1578,7 @@ GameObject:
   - component: {fileID: 1100226023}
   - component: {fileID: 1100226022}
   - component: {fileID: 1100226021}
-  - component: {fileID: 1100226020}
+  - component: {fileID: 1100226025}
   m_Layer: 0
   m_Name: p_body
   m_TagString: Untagged
@@ -1604,24 +1604,6 @@ Transform:
   - {fileID: 1729545604}
   m_Father: {fileID: 663006716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1100226020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100226018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa3d309c15834f5c85c4206812c274b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _feetColl: {fileID: 900662372}
-  groundDetectionRayLength: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  debugShowIsGrounded: 1
 --- !u!114 &1100226021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1638,7 +1620,7 @@ MonoBehaviour:
   _rb: {fileID: 1100226024}
   _spriteGO: {fileID: 1690628004}
   _feetColl: {fileID: 900662372}
-  _groundCheck: {fileID: 0}
+  _groundCheck: {fileID: 1100226025}
 --- !u!114 &1100226022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1726,6 +1708,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1100226025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100226018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598841028fa7c8fbcac42dda1e243bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _feetColl: {fileID: 900662372}
+  groundDetectionRayLength: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  debugShowIsGrounded: 1
 --- !u!1 &1123454427
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,8 +2178,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 324676613}
-  m_Follow: {fileID: 324676613}
+  m_LookAt: {fileID: 1729545604}
+  m_Follow: {fileID: 1729545604}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 6.46
@@ -2208,7 +2208,7 @@ Transform:
   m_GameObject: {fileID: 1447331594}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -3.12, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2598,7 +2598,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7caa9812b5bbdb941b520819d2d32d86, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4963955, g: 0.9150943, b: 0.5121817, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2786,7 +2786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1729545604}
   m_Layer: 0
-  m_Name: testTarget
+  m_Name: p_Camera-Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
