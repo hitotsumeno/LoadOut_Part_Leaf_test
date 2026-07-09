@@ -7,6 +7,7 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] private InputReader input;
     
     // --- Component References ---
+    [Header("--- Component References ---")]
     public Rigidbody2D _rb;
     public GameObject _spriteGO;
     public Collider2D _feetColl;
@@ -14,6 +15,7 @@ public class PlayerStateManager : MonoBehaviour
 
 
     // --- States ---
+    [Header("--- States ---")]
     public PlayerIdleState idleState;
     public PlayerMoveState moveState; 
     public PlayerJumpState jumpState;
