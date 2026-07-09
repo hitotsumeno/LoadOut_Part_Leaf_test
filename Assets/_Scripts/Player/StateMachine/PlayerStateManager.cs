@@ -14,18 +14,17 @@ public class PlayerStateManager : MonoBehaviour
 
 
     // --- States ---
-    public PlayerIdleState idleState {get; private set; }
-    public PlayerMoveState moveState {get; private set; }    
-    public PlayerJumpState jumpState {get; private set; }
+    public PlayerIdleState idleState;
+    public PlayerMoveState moveState; 
+    public PlayerJumpState jumpState;
 
     private PlayerBaseState _currentState;
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-
-        idleState = new PlayerIdleState(this,input);
-        moveState = new PlayerMoveState(this,input);
-        jumpState = new PlayerJumpState(this,input);
+        idleState.Init(this,input);
+        moveState.Init(this,input);
+        jumpState.Init(this,input);
     }
 
     void Start()

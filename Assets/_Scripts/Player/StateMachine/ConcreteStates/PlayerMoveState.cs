@@ -12,13 +12,11 @@ public class PlayerMoveState : PlayerBaseState
     [SerializeField] private float horizontalMaxSpeed = 12.5f;
     [SerializeField] private float rotationCoef = -.5f;
 
-    public PlayerMoveState(PlayerStateManager manager, InputReader reader) 
-        : base(manager, reader){}
-
     public override void EnterState()
     {
         Reader.MoveEvent += HandleMove;
         Reader.JumpEvent += HandleJump;
+        Debug.Log("Player enters Move state");
     }
 
  
@@ -34,10 +32,13 @@ public class PlayerMoveState : PlayerBaseState
     }
      public override void FixedUpdateState()
     {
-        Move(groundAcceleration, groundDeceleration, _movementDir);
+        if (Move(groundAcceleration, groundDeceleration, _movementDir) <= 0.05f)
+        {
+            StateManager.SwitchStateTo(StateManager.idleState);
+        }
     }
 
-    private void Move(float acceleration, float deceleration, Vector2 moveInput)
+    private float Move(float acceleration, float deceleration, Vector2 moveInput)
     {
         if (moveInput != Vector2.zero)
         {
@@ -47,6 +48,7 @@ public class PlayerMoveState : PlayerBaseState
             _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.deltaTime);
             StateManager._rb.velocity = new Vector2(_moveVelocity.x, StateManager._rb.velocity.y);
             RotateCircle(_moveVelocity.x);
+            return Mathf.Abs(_moveVelocity.x);
         }
 
         if (moveInput == Vector2.zero)
@@ -54,7 +56,10 @@ public class PlayerMoveState : PlayerBaseState
             _moveVelocity = Vector2.Lerp(_moveVelocity,Vector2.zero, deceleration * Time.deltaTime);
             StateManager._rb.velocity = new Vector2(_moveVelocity.x, StateManager._rb.velocity.y);
             RotateCircle(_moveVelocity.x);
+            return Mathf.Abs(_moveVelocity.x);
         }
+        
+        return 0f;
     }
 
     private void RotateCircle(float cVelocity)

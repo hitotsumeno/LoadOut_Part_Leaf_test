@@ -7,13 +7,12 @@ public class PlayerJumpState : PlayerBaseState
 {
     [SerializeField] private float VerticalForce = 9f;
 
-    public PlayerJumpState(PlayerStateManager manager, InputReader reader) : base(manager, reader){}
-
     public override void EnterState()
     {
         Reader.MoveEvent += HandleMove;
         Reader.JumpEvent += HandleJump;
         Jump();
+        Debug.Log("Player enters Jump state");
     }
     public override void ExitState()
     {
@@ -28,7 +27,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void UpdateState()
     {
-        // throw new System.NotImplementedException();
+        
     }
     private void Jump()
     {
@@ -43,9 +42,9 @@ public class PlayerJumpState : PlayerBaseState
     {
         Jump();
     }
-        private void HandleMove(float dir)
+    private void HandleMove(float dir)
     {
-            if (dir != 0f)
+        if (dir != 0f)
         {
             StateManager.SwitchStateTo(StateManager.moveState);
         } 
