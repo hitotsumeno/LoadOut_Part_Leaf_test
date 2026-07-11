@@ -1704,9 +1704,9 @@ MonoBehaviour:
   _spriteGO: {fileID: 1690628004}
   _feetColl: {fileID: 900662372}
   _groundCheck: {fileID: 1100226025}
-  idleState: {fileID: 0}
-  moveState: {fileID: 0}
-  jumpState: {fileID: 0}
+  idleState: {fileID: 1418009023}
+  moveState: {fileID: 344695520}
+  jumpState: {fileID: 2138792659}
 --- !u!114 &1100226022
 MonoBehaviour:
   m_ObjectHideFlags: 0
