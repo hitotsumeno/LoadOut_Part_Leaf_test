@@ -2273,7 +2273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationCoef: -0.5
-  idleDelay: 3
+  idleDelay: 0.2
   rotationSpeed: 0.15
 --- !u!1 &1447331594
 GameObject:
