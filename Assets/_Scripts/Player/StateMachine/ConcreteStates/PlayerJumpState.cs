@@ -10,14 +10,14 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState()
     {
         Reader.MoveEvent += HandleMove;
-        Reader.JumpEvent += HandleJump;
+        Reader.JumpPressedEvent += HandleJump;
         Jump();
         Debug.Log("Player enters Jump state");
     }
     public override void ExitState()
     {
         Reader.MoveEvent -= HandleMove;
-        Reader.JumpEvent -= HandleJump;
+        Reader.JumpPressedEvent -= HandleJump;
     }
 
     public override void FixedUpdateState()

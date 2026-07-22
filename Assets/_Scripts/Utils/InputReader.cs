@@ -51,7 +51,9 @@ public class InputReader : ScriptableObject, InputMap.IPlayerControlsActions, In
 
     public event Action<float> MoveEvent;
     public event Action InteractEvent;
-    public event Action JumpEvent;
+    public event Action JumpPressedEvent;
+    public event Action JumpIsHeldEvent;
+    public event Action JumpReleaseEvent;
     public event Action PauseEvent;
     public event Action ResumeEvent;
     
@@ -70,9 +72,25 @@ public class InputReader : ScriptableObject, InputMap.IPlayerControlsActions, In
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (context.phase == InputActionPhase.Started)
+        {
+            JumpPressedEvent?.Invoke();
+        }
+    }
+
+        public void JumpIsHeld(InputAction.CallbackContext context)
+    {
         if (context.phase == InputActionPhase.Performed)
         {
-            JumpEvent?.Invoke();
+            JumpIsHeldEvent?.Invoke();
+        }
+    }
+
+    public void OnJumpRelease(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            JumpReleaseEvent?.Invoke();
         }
     }
 

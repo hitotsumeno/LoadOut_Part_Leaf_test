@@ -14,7 +14,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void EnterState()
     {
         Reader.MoveEvent += HandleMove;
-        Reader.JumpEvent += HandleJump;
+        Reader.JumpPressedEvent += HandleJump;
 
         Debug.Log("Player enters IDLE state");
 
@@ -25,7 +25,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void ExitState()
     {
         Reader.MoveEvent -= HandleMove;
-        Reader.JumpEvent -= HandleJump;
+        Reader.JumpPressedEvent -= HandleJump;
 
         if (_idleRoutine != null)
         {
