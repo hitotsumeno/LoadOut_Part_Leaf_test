@@ -6,6 +6,8 @@ public class PlayerStateManager : MonoBehaviour
 {    
     [SerializeField] private InputReader input;
     
+    // public PlayerMoveStatsSCO moveStats;
+    
     // --- Component References ---
     [Header("--- Component References ---")]
     public Rigidbody2D _rb;
