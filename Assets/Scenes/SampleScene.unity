@@ -1700,6 +1700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: a7818d095cb6e488fadb8e74a3b9f4c9, type: 2}
+  MoveStats: {fileID: 11400000, guid: eace0fe24a368fcde8d816897d7fc9d8, type: 2}
   _rb: {fileID: 1100226024}
   _spriteGO: {fileID: 1690628004}
   _feetColl: {fileID: 900662372}
