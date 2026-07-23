@@ -75,22 +75,19 @@ public class InputReader : ScriptableObject, InputMap.IPlayerControlsActions, In
         if (context.phase == InputActionPhase.Started)
         {
             JumpPressedEvent?.Invoke();
+            // Debug.Log("Jump button was pressed");
         }
-    }
 
-        public void JumpIsHeld(InputAction.CallbackContext context)
-    {
         if (context.phase == InputActionPhase.Performed)
         {
             JumpIsHeldEvent?.Invoke();
+            // Debug.Log("Jump button is Held");
         }
-    }
 
-    public void OnJumpRelease(InputAction.CallbackContext context)
-    {
         if (context.phase == InputActionPhase.Canceled)
         {
             JumpReleaseEvent?.Invoke();
+            // Debug.Log("Jump button was release");
         }
     }
 
