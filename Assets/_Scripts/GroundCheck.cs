@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,17 +17,13 @@ public class GroundCheck : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool debugShowIsGrounded;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public event Action<bool> isGroundedEvent;
 
-    // Update is called once per frame
     void Update()
     {
         CollisionChecks();
     }
+
     #region Ground Check
     private void IsGrounded()
     {
@@ -42,6 +39,7 @@ public class GroundCheck : MonoBehaviour
         {
             _isGrounded = false;
         }
+        isGroundedEvent?.Invoke(_isGrounded);
 
         #region Debug Visualization
         if (debugShowIsGrounded)
