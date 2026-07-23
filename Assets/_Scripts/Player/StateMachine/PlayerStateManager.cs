@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerStateManager : MonoBehaviour
 {    
     [SerializeField] private InputReader input;
-    
-    // public PlayerMoveStatsSCO moveStats;
+    public PlayerMoveStatsSCO MoveStats;
     
     // --- Component References ---
     [Header("--- Component References ---")]
