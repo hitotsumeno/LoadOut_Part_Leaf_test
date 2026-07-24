@@ -34,7 +34,7 @@ public class PlayerJumpState : PlayerBaseState
 
     private float _coyoteTimer;
 
-#region Enter/Exit State logic
+    #region Enter/Exit State logic
     public override void EnterState()
     {
         Reader.MoveEvent += HandleMove;
@@ -42,8 +42,8 @@ public class PlayerJumpState : PlayerBaseState
         Reader.JumpIsHeldEvent += HandleJumpIsHeld;
         Reader.JumpReleaseEvent += HandleJumpRelease;
         JumpPressed();
-        JumpChecks();
-        Jump();
+        // JumpChecks();
+        // Jump();
         Debug.Log("Player enters Jump state");
     }
 
@@ -54,7 +54,7 @@ public class PlayerJumpState : PlayerBaseState
         Reader.JumpIsHeldEvent -= HandleJumpIsHeld;
         Reader.JumpReleaseEvent -= HandleJumpRelease;
     }
-#endregion
+    #endregion
 
     public override void UpdateState()
     {
@@ -224,6 +224,11 @@ public class PlayerJumpState : PlayerBaseState
         // }
     }
 
+    private void LandedCheck()
+    {
+        
+    }
+
    #region Timers
     private void CountTimers()
     {
@@ -240,6 +245,7 @@ public class PlayerJumpState : PlayerBaseState
     }
     #endregion
 
+    #region Jump button Behaviour
     private void JumpPressed()
     {
         _jumpBufferTimer = StateManager.MoveStats.JumpBufferTime;
@@ -271,7 +277,7 @@ public class PlayerJumpState : PlayerBaseState
             }
         }   
     }
-
+    #endregion
 
     #region Handle Events
     private void HandleJumpPressed()
@@ -282,7 +288,7 @@ public class PlayerJumpState : PlayerBaseState
 
     private void HandleJumpRelease()
     {
-        //When we release  the jump button
+        // When we release  the jump button
        JumpReleased();
     }
 
