@@ -9,14 +9,14 @@ public class PlayerMoveStatsSCO : ScriptableObject
 {
 
     [Header("Walk")]
-    [Range(1f, 100f)] public float maxWalkSpeed = 12.5f;
+    [Range(0f, 01f)] public float MoveThreshold = 0.25f;
+    [Range(1f, 100f)] public float horizontalMaxSpeed = 12.5f;
     [Range(0.25f, 50f)] public float GroundAcceleration = 5f;
     [Range(0.25f, 50f)] public float GroundDeceleration = 20f;
     [Range(0.25f, 50f)] public float AirAcceleration = 5f;
     [Range(0.25f, 50f)] public float AirDeceleration = 5f;
 
-    [Header("Run")]
-    [Range(1f, 100f)] public float maxRunSpeed = 12.5f;
+    [SerializeField] public float rotationCoef = -.5f;
 
     [Header("Grounded/Collision Checks")]
     public LayerMask GroundLayer;

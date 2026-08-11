@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -14,12 +15,15 @@ public class PlayerStateManager : MonoBehaviour
     public Collider2D _feetColl;
     public GroundCheck _groundCheck;
 
+    public float p_HorizontalVelocity;
+    public float p_VerticalVelocity;
+
 
     // --- States ---
     [Header("--- States ---")]
     public PlayerIdleState idleState;
     public PlayerMoveState moveState; 
-    public PlayerJumpState jumpState;
+    public PlayerAirState airState;
 
     private PlayerBaseState _currentState;
     void Awake()
@@ -27,7 +31,7 @@ public class PlayerStateManager : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         idleState.Init(this,input);
         moveState.Init(this,input);
-        jumpState.Init(this,input);
+        airState.Init(this,input);
     }
 
     void Start()
@@ -44,6 +48,7 @@ public class PlayerStateManager : MonoBehaviour
     void FixedUpdate()
     {
         _currentState.FixedUpdateState();
+        ApplyVelocity();
     }
 
     public void SwitchStateTo(PlayerBaseState newState)
@@ -52,8 +57,9 @@ public class PlayerStateManager : MonoBehaviour
         _currentState = newState;
         newState.EnterState();
     }
-    void OnEnable()
-    {
-         
+    
+    private void ApplyVelocity()
+    {        
+        _rb.velocity = new Vector2(p_HorizontalVelocity, p_VerticalVelocity);
     }
 }

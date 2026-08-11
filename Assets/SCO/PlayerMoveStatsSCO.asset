@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430b2cb07bed5e0bbbe2c2929f08f0b8, type: 3}
   m_Name: PlayerMoveStatsSCO
   m_EditorClassIdentifier: 
+  MoveThreshold: 0.25
   maxWalkSpeed: 12.5
   GroundAcceleration: 5
   GroundDeceleration: 20
@@ -29,7 +30,7 @@ MonoBehaviour:
   TimeTillJumpApex: 0.35
   GravityOnReleaseMultiplier: 2
   MaxFallSpeed: 26
-  NumberOfJumpAllowed: 4
+  NumberOfJumpAllowed: 1
   TimeForUpwardsCancel: 0.027
   ApexThreshold: 0.97
   ApexHangTime: 0.075

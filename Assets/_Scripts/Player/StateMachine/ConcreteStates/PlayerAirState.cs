@@ -1,12 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerBaseState
+public class PlayerAirState : PlayerBaseState
 {
     [SerializeField] private float VerticalForce = 9f;
+
+    private float horizontalMoveDir;
 
     // Jump Event var
     bool JumpWasPressed;
@@ -32,7 +32,6 @@ public class PlayerJumpState : PlayerBaseState
     private bool _jumpReleasedDuringBuffer;
 
     // Coyote Time var
-
     private float _coyoteTimer;
 
     #region Enter/Exit State logic
@@ -42,7 +41,10 @@ public class PlayerJumpState : PlayerBaseState
         Reader.JumpPressedEvent += HandleJumpPressed;
         Reader.JumpIsHeldEvent += HandleJumpIsHeld;
         Reader.JumpReleaseEvent += HandleJumpRelease;
-        JumpPressed();
+
+        horizontalMoveDir = Reader.MoveDirections;
+
+        // JumpPressed();
         // JumpChecks();
         // Jump();
         Debug.Log("Player enters Jump state");
@@ -66,6 +68,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void FixedUpdateState()
     {
         Jump();
+        AirbornMove(horizontalMoveDir);
     }
 
     private void JumpChecks()
@@ -227,10 +230,12 @@ public class PlayerJumpState : PlayerBaseState
             _isPastApexThreshold = false;
             _fastFallTime = 0f;
             _numberOfJumpUsed = 0;
-            VerticalVelocity = Physics2D.gravity.y;
+            VerticalVelocity = 0;
             StateManager.p_VerticalVelocity = VerticalVelocity;
 
-            if (Mathf.Abs(StateManager.p_HorizontalVelocity) > 0)
+            Debug.Log($"LANDED  p_H={StateManager.p_HorizontalVelocity:F3}  rb.x={StateManager._rb.velocity.x:F3}");
+
+            if (Mathf.Abs(StateManager.p_HorizontalVelocity) > 0.05f)
             {
                 StateManager.SwitchStateTo(StateManager.moveState);
             }
@@ -239,6 +244,18 @@ public class PlayerJumpState : PlayerBaseState
                 StateManager.SwitchStateTo(StateManager.idleState);
             }
         }
+    }
+
+    #region Airborn Horizontal Movement 
+    private void AirbornMove(float moveInput)
+    {
+        StateManager.p_HorizontalVelocity = MoveHorizontal(StateManager.p_HorizontalVelocity,StateManager.MoveStats.AirAcceleration,StateManager.MoveStats.AirDeceleration,moveInput);
+    }
+    #endregion
+
+    public void QueueJump()
+    {
+        JumpPressed();
     }
 
    #region Timers
@@ -311,12 +328,7 @@ public class PlayerJumpState : PlayerBaseState
     }
     private void HandleMove(float dir)
     {
-        if (dir != 0f)
-        {
-            StateManager.SwitchStateTo(StateManager.moveState);
-        } 
-        else 
-            return;
+        horizontalMoveDir = dir;
     }
     #endregion
 }

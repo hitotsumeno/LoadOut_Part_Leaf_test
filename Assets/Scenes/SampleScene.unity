@@ -565,9 +565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f652a4104f0e8ecaef26d9a6bb0d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundAcceleration: 5
-  groundDeceleration: 20
-  horizontalMaxSpeed: 12.5
   rotationCoef: -0.5
 --- !u!1 &395081829
 GameObject:
@@ -1705,9 +1702,11 @@ MonoBehaviour:
   _spriteGO: {fileID: 1690628004}
   _feetColl: {fileID: 900662372}
   _groundCheck: {fileID: 1100226025}
+  p_HorizontalVelocity: 0
+  p_VerticalVelocity: 0
   idleState: {fileID: 1418009023}
   moveState: {fileID: 344695520}
-  jumpState: {fileID: 2138792659}
+  airState: {fileID: 2138792659}
 --- !u!114 &1100226022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3305,7 +3304,7 @@ GameObject:
   - component: {fileID: 2138792658}
   - component: {fileID: 2138792659}
   m_Layer: 0
-  m_Name: p_JumpState
+  m_Name: p_AirState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3335,7 +3334,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2138792657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e78590998a7f9ed6294b8d887e95fcc0, type: 3}
+  m_Script: {fileID: 11500000, guid: fb37b301c51474018be39e73c36d5ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   VerticalForce: 9

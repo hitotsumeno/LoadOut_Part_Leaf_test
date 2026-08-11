@@ -23,4 +23,28 @@ public abstract class PlayerBaseState : MonoBehaviour
     public virtual void FixedUpdateState() {}
     public virtual void ExitState() {}
 
+    protected float MoveHorizontal(float currentVelocity, float acceleration, float deceleration, float moveInput)
+    {
+        if (Mathf.Abs(moveInput) >= StateManager.MoveStats.MoveThreshold)
+        {
+            float targetVelocity = 0f;
+            targetVelocity = moveInput * StateManager.MoveStats.horizontalMaxSpeed;
+
+            currentVelocity = Mathf.Lerp(currentVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+            RotateCircle(currentVelocity);
+        }
+
+        if (Mathf.Abs(moveInput) <= StateManager.MoveStats.MoveThreshold)
+        {
+            currentVelocity = Mathf.Lerp(currentVelocity, 0f, deceleration * Time.fixedDeltaTime);
+            RotateCircle(currentVelocity);
+        }
+        
+        return currentVelocity;
+    }
+
+    protected void RotateCircle(float cVelocity)
+    {
+        StateManager._spriteGO.transform.Rotate(0, 0, cVelocity *  StateManager.MoveStats.rotationCoef);
+    }
 }

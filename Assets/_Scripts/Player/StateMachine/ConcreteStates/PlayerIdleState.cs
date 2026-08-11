@@ -35,7 +35,11 @@ public class PlayerIdleState : PlayerBaseState
     }
     public override void FixedUpdateState()
     {
-        
+        if (!StateManager._groundCheck._isGrounded)
+        {
+            StateManager.SwitchStateTo(StateManager.airState);
+            return;
+        }
     }
 
     public override void UpdateState()
@@ -54,11 +58,6 @@ public class PlayerIdleState : PlayerBaseState
         }
     }
 
-    private void RotateCircle(float cVelocity)
-    {
-        StateManager._spriteGO.transform.Rotate(0, 0, cVelocity * rotationCoef);
-    }
-
     #region Handle Events
         private void HandleMove(float dir)
     {
@@ -71,7 +70,8 @@ public class PlayerIdleState : PlayerBaseState
     }
     private void HandleJump()
     {
-        StateManager.SwitchStateTo(StateManager.jumpState);
+        StateManager.airState.QueueJump();
+        StateManager.SwitchStateTo(StateManager.airState);
     }
     #endregion
 

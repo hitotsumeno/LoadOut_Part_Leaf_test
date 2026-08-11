@@ -49,6 +49,7 @@ public class InputReader : ScriptableObject, InputMap.IPlayerControlsActions, In
     }
 #endregion
 
+    public float MoveDirections {get; private set;}
     public event Action<float> MoveEvent;
     public event Action InteractEvent;
     public event Action JumpPressedEvent;
@@ -60,7 +61,8 @@ public class InputReader : ScriptableObject, InputMap.IPlayerControlsActions, In
 #region Event
     public void OnMove(InputAction.CallbackContext context)
     {
-        MoveEvent?.Invoke(context.ReadValue<float>());
+        MoveDirections = context.ReadValue<float>();
+        MoveEvent?.Invoke(MoveDirections);
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
